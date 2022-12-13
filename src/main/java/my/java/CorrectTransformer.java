@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParserFactory;
+import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXSource;
@@ -16,7 +17,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
-public class Transformer {
+public class CorrectTransformer {
 
     public static void main(String[] args) throws IOException {
 
@@ -42,7 +43,7 @@ public class Transformer {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
         try {
-            javax.xml.transform.Transformer transformer = TransformerFactory.newInstance().newTransformer(new StreamSource(xslStream));
+            Transformer transformer = TransformerFactory.newInstance().newTransformer(new StreamSource(xslStream));
             XMLReader reader = SAXParserFactory.newInstance().newSAXParser().getXMLReader();
             transformer.transform(new SAXSource(reader, new InputSource(xmlStream)), new StreamResult(outputStream));
 
